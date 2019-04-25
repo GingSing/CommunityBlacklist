@@ -1,34 +1,39 @@
-const sequelize = require('../sequelizedb');
-const Sequelize = require('sequelize');
-const Model = Sequelize.Model;
-
-class User extends Model {}
-User.init({
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    userName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    ebayUserName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    }
-},
-{
-    sequelize,
-    modelName: 'user'
-})
+// name, userName, ebayUserName, email, password, online, avatar, messageBox
+module.exports = (sequelize, type) => {
+    return sequelize.define('user', {
+        name: {
+            type: type.STRING,
+            allowNull: false
+        },
+        userName: {
+            type: type.STRING,
+            allowNull: false,
+            unique: true
+        },
+        ebayUserName: {
+            type: type.STRING,
+            allowNull: false,
+            unique: true
+        },
+        email: {
+            type: type.STRING,
+            allowNull: false,
+            unique: true
+        },
+        password: {
+            type: type.TEXT,
+            allowNull: false
+        },
+        online: {
+            type: type.BOOLEAN,
+            defaultValue: false
+        },
+        avatar: {
+            type: type.TEXT,
+            defaultValue: ""
+        },
+        messageBox: {
+            type: type.ARRAY(type.TEXT),
+            defaultValue: []
+        }
+})};

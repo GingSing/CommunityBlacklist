@@ -1,38 +1,31 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../sequelizedb');
-const Model = Sequelize.Model;
 
 //TODO: Link BlackListedUser and Users
 
-class BlacklistedUser extends Model(){}
-BlacklistedUser.init({
-    ebayUserName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    description: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    evidence: {
-        type: Sequelize.ARRAY,
-        allowNull: false
-    },
-    comments: {
-        type: Sequelize.ARRAY,
-        default: []
-    },
-    votes: {
-        type: Sequelize.NUMBER,
-        default: 0
-    },
-    voters: {
-        type: Sequelize.ARRAY,
-        default: []
-    }
-},
-{
-    sequelize,
-    model: 'blacklisteduser'
-});
+module.exports = (sequelize, type) => { 
+    return sequelize.define('blacklisteduser',{
+        ebayUserName: {
+            type: type.STRING,
+            allowNull: false,
+            unique: true
+        },
+        description: {
+            type: type.TEXT,
+            allowNull: false
+        },
+        evidence: {
+            type: type.ARRAY(type.TEXT),
+            defaultValue: []
+        },
+        comments: {
+            type: type.ARRAY(type.TEXT),
+            defaultValue: []
+        },
+        votes: {
+            type: type.INTEGER,
+            defaultValue: 0
+        },
+        voters: {
+            type: type.ARRAY(type.STRING),
+            defaultValue: []
+        }
+})};
