@@ -1,8 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const Sequelize = require('sequelize');
 const bcrypt = require('bcryptjs');
-const User = Sequelize.User;
+const { User } = require('./sequelize');
 
 passport.use(new LocalStrategy(
     {usernameField: 'email'},
@@ -23,6 +22,10 @@ passport.use(new LocalStrategy(
 //tells passport to serialize user
 passport.serializeUser((user, done) => {
     done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    User.findByPk(id).then(user => {return done(null, user)});
 });
 
 module.exports=passport;

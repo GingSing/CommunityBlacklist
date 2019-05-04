@@ -14,6 +14,17 @@ const blacklist = require('./routes/api/blacklist');
 
 const app = express();
 
+//credentials must be true to set cookies in browser
+const corsOptions = {
+    //origin allows the credentials to be included
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(cors(corsOptions));
+
 //applies rate limit to all requests
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -37,9 +48,6 @@ app.use(session({
         maxAge: 60000*60*24
     }
 }));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(cors());
 
 app.use(passport.initialize());
 app.use(passport.session());

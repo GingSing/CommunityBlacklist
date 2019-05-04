@@ -1,4 +1,4 @@
-// name, userName, ebayUserName, email, password, online, avatar, messageBox
+// name, userName, ebayUserName, email, password, online, avatar, messageBox, verified
 module.exports = (sequelize, type) => {
     return sequelize.define('user', {
         name: {
@@ -35,5 +35,9 @@ module.exports = (sequelize, type) => {
         messageBox: {
             type: type.ARRAY(type.TEXT),
             defaultValue: []
+        },
+        verified: {
+            type: type.BOOLEAN,
+            defaultValue: false
         }
 })};
