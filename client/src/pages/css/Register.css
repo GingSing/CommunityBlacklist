@@ -1,0 +1,10 @@
+.register{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}

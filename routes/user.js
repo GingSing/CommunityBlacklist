@@ -37,10 +37,15 @@ router.post('/login', function(req, res) {
     })(req, res);
 });
 
-router.get('/checkSession', ensureAuthenticated, function(req, res) {
-    console.log(req.session);
-    return res.json({"message":"You are logged in and authenticated.", user: req.session.user});
-});
+//used to decide whether authentication is necessary on the user side
+router.get('/ensureAuthentication', ensureAuthenticated, function(req, res){
+    return res.status(200).json({"message":"You are logged in and authenticated.", user: req.session.user});
+})
+
+// router.get('/checkSession', ensureAuthenticated, function(req, res) {
+//     console.log(req.session);
+//     return res.json({"message":"You are logged in and authenticated.", user: req.session.user});
+// });
 
 router.patch('/changeName', function(req, res){
     const {newEmail} = req.body;

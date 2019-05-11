@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/Login.css';
 
 class Login extends Component{
     constructor(props){
@@ -18,6 +19,7 @@ class Login extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.state.email, this.state.password);
         //credentials must be set to put cookies
         const requestOptions = {
             method: 'post',
@@ -31,15 +33,15 @@ class Login extends Component{
         .then(res => res.json())
         .then(user=>{
             console.log(user);
-            this.props.history.push('/info');
+            this.props.history.push('/');
         })
         .catch(err => console.log(err));
     }
     render(){
         return(
-            <div className="container">
-                <form onSubmit={this.handleSubmit} className="login">
-                    <h5>Sign In</h5>
+            <div className="login">
+                <form onSubmit={this.handleSubmit} className="loginForm">
+                    <h3>Sign In</h3>
                     <div className="inputField">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" onChange={this.handleChange}/>

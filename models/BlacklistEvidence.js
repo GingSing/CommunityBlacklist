@@ -2,22 +2,22 @@
 //TODO: Link BlackListedUser and Users
 
 module.exports = (sequelize, type) => { 
-    return sequelize.define('blacklisteduser',{
+    return sequelize.define('blacklistevidence',{
         ebayUserName: {
             type: type.STRING,
             allowNull: false,
             unique: true
         },
-        comments: {
+        description: {
+            type: type.TEXT,
+            allowNull: false
+        },
+        evidence: {
             type: type.ARRAY(type.TEXT),
             defaultValue: []
         },
-        votes: {
-            type: type.INTEGER,
-            defaultValue: 0
-        },
-        voters: {
-            type: type.ARRAY(type.STRING),
+        comments: {
+            type: type.ARRAY(type.TEXT),
             defaultValue: []
         }
 })};

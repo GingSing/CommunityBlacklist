@@ -11,7 +11,7 @@ class Info extends Component {
             method: 'get',
             credentials: 'include'
         }
-        fetch('http://localhost:4000/user/checkSession', fetchOptions)
+        fetch('http://localhost:4000/user/ensureAuthentication', fetchOptions)
         .then(res=>res.json())
         .then(body=>{
             console.log(body);
